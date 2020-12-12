@@ -3,6 +3,7 @@ package com.tck.my.opengl
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tck.my.opengl.camerax.CameraEnterActivity
 import com.tck.my.opengl.camerax.CameraxActivity
 import com.tck.my.opengl.databinding.ActivityMainBinding
 import com.tck.my.opengl.one.OpenGLTrainOneActivity
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnOpenglCamerax.setOnClickListener {
-            startActivity(Intent(this, CameraxActivity::class.java))
+            startActivity(Intent(this, CameraEnterActivity::class.java))
         }
     }
 }

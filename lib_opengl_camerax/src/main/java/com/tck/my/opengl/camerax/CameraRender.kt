@@ -18,14 +18,17 @@ import javax.microedition.khronos.opengles.GL10
  * @version v1.0.0
  *
  */
-class CameraRender : GLSurfaceView.Renderer,
+class CameraRender(private var cameraXView: CameraXView) : GLSurfaceView.Renderer,
     Preview.OnPreviewOutputUpdateListener,
     SurfaceTexture.OnFrameAvailableListener {
-    private val cameraHelper: CameraHelper
-    private val cameraXView: CameraXView
+    private var cameraHelper: CameraHelper
+    private val textures = IntArray(1)
+    private var surfaceTexture: SurfaceTexture? = null
+    private var screenFilter: ScreenFilter? = null
 
-    constructor(cameraXView: CameraXView) {
-        this.cameraXView = cameraXView
+    private var mtx = FloatArray(16)
+
+    init {
         cameraXView.context as LifecycleOwner
         cameraHelper = CameraHelper(cameraXView.context as LifecycleOwner, this)
     }
@@ -34,22 +37,29 @@ class CameraRender : GLSurfaceView.Renderer,
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        TODO("Not yet implemented")
+        surfaceTexture?.attachToGLContext(textures[0])
+        // 当摄像头数据有更新回调 onFrameAvailable
+        surfaceTexture?.setOnFrameAvailableListener(this)
+
+        screenFilter = ScreenFilter(cameraXView.context)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        TODO("Not yet implemented")
+        screenFilter?.setSize(width, height)
     }
 
     override fun onDrawFrame(gl: GL10?) {
-        TODO("Not yet implemented")
+        surfaceTexture?.updateTexImage()
+        surfaceTexture?.getTransformMatrix(mtx)
+        screenFilter?.setTransformMatrix(mtx)
+        screenFilter?.onDraw(textures[0])
     }
 
     override fun onUpdated(output: Preview.PreviewOutput?) {
-        TODO("Not yet implemented")
+        surfaceTexture = output?.surfaceTexture
     }
 
     override fun onFrameAvailable(surfaceTexture: SurfaceTexture?) {
-        TODO("Not yet implemented")
+      cameraXView.requestRender()
     }
 }

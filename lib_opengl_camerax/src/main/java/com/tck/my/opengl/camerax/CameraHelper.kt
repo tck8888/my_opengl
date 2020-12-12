@@ -1,6 +1,10 @@
 package com.tck.my.opengl.camerax
 
+import android.os.HandlerThread
+import android.util.Size
+import androidx.camera.core.CameraX
 import androidx.camera.core.Preview
+import androidx.camera.core.PreviewConfig
 import androidx.lifecycle.LifecycleOwner
 
 /**
@@ -16,6 +20,21 @@ import androidx.lifecycle.LifecycleOwner
  */
 class CameraHelper(
     lifecycleOwner: LifecycleOwner,
-    listener: Preview.OnPreviewOutputUpdateListener
+    private val listener: Preview.OnPreviewOutputUpdateListener
 ) {
+    private val handlerThread: HandlerThread = HandlerThread("Analyze-thread")
+
+    init {
+        handlerThread.start()
+        CameraX.bindToLifecycle(lifecycleOwner, getPreView())
+    }
+
+    private fun getPreView(): Preview {
+        val previewConfig = PreviewConfig.Builder().setTargetResolution(Size(640, 480))
+            .setLensFacing(CameraX.LensFacing.BACK).build()
+
+        return Preview(previewConfig).apply {
+            onPreviewOutputUpdateListener = listener
+        }
+    }
 }
