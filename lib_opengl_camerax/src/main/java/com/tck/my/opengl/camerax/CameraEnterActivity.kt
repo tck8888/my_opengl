@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.tck.my.opengl.camerax.databinding.ActivityCameraEnterBinding
+import com.tck.my.opengl.camerax.two.CameraXTwoActivity
 
 class CameraEnterActivity : AppCompatActivity() {
 
@@ -19,12 +20,30 @@ class CameraEnterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCameraEnterBinding
 
+    private var type = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraEnterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnEnterCamera.setOnClickListener {
+            type = 0
+            val all = permission.all {
+                ContextCompat.checkSelfPermission(
+                    this,
+                    it
+                ) == PackageManager.PERMISSION_GRANTED
+            }
+            if (all) {
+                jump()
+            } else {
+                ActivityCompat.requestPermissions(this, permission, 100)
+            }
+        }
+
+        binding.btnEnterCamera2.setOnClickListener {
+            type = 1
             val all = permission.all {
                 ContextCompat.checkSelfPermission(
                     this,
@@ -57,6 +76,10 @@ class CameraEnterActivity : AppCompatActivity() {
     }
 
     private fun jump() {
-        startActivity(Intent(this, CameraxActivity::class.java))
+        if (type == 0) {
+            startActivity(Intent(this, CameraxActivity::class.java))
+        } else if (type == 1) {
+            startActivity(Intent(this, CameraXTwoActivity::class.java))
+        }
     }
 }
