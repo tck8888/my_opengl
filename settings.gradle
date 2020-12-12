@@ -1,0 +1,3 @@
+include ':lib_opengl_one'
+include ':app'
+rootProject.name = "my_opengl"
