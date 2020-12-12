@@ -3,6 +3,7 @@ package com.tck.my.opengl
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tck.my.opengl.camerax.CameraxActivity
 import com.tck.my.opengl.databinding.ActivityMainBinding
 import com.tck.my.opengl.one.OpenGLTrainOneActivity
 
@@ -16,7 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnOpenglTrainOne.setOnClickListener {
             startActivity(Intent(this, OpenGLTrainOneActivity::class.java))
+        }
 
+        binding.btnOpenglCamerax.setOnClickListener {
+            startActivity(Intent(this, CameraxActivity::class.java))
         }
     }
 }

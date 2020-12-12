@@ -9,9 +9,17 @@
     tools:context=".MainActivity">
 
     <Button
-        android:textAllCaps="false"
-        android:text="OpenGL Train one create EGL"
         android:id="@+id/btn_opengl_train_one"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="OpenGL Train one create EGL"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_opengl_camerax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="OpenGL Train camerax"
+        android:textAllCaps="false" />
 </LinearLayout>
