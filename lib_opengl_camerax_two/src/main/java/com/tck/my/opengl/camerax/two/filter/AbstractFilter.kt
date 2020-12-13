@@ -54,19 +54,19 @@ abstract class AbstractFilter(context: Context, vertexShaderRawId: Int, fragment
         textureBuffer.put(OpenGLUtils.TEXURE)
     }
 
-    private fun initGL(context: Context, vertexShaderRawId: Int, fragmentShaderRawId: Int) {
+    open fun initGL(context: Context, vertexShaderRawId: Int, fragmentShaderRawId: Int) {
         program = OpenGLUtils.loadProgram(context, vertexShaderRawId, fragmentShaderRawId)
         vPosition = GLES20.glGetAttribLocation(program, "vPosition")
         vCoord = GLES20.glGetAttribLocation(program, "vCoord")
         vTexture = GLES20.glGetUniformLocation(program, "vTexture")
     }
 
-    fun setSize(width: Int, height: Int) {
+    open fun setSize(width: Int, height: Int) {
         this.width = width
         this.height = height
     }
 
-    fun onDraw(texture: Int): Int {
+    open fun onDraw(texture: Int): Int {
         GLES20.glViewport(0, 0, width, height)
 
         GLES20.glUseProgram(program)
@@ -96,9 +96,9 @@ abstract class AbstractFilter(context: Context, vertexShaderRawId: Int, fragment
         return texture
     }
 
-    abstract fun beforeDraw()
+    open fun beforeDraw() {}
 
-    fun release(){
+    open fun release() {
         GLES20.glDeleteProgram(program)
     }
 
