@@ -26,13 +26,13 @@ class TGLSurfaceView : SurfaceView, SurfaceHolder.Callback {
         val RENDERMODE_CONTINUOUSLY = 1
     }
 
-    private var surface: Surface? = null
-    private var eglContext: EGLContext? = null
-    private var tglRender: TGLRender? = null
+    var surface: Surface? = null
+    var teglContext: EGLContext? = null
+    var mTGLRender: TGLRender? = null
     private var teglThread: TEGLThread? = null
 
 
-    private var renderMode = RENDERMODE_CONTINUOUSLY
+    var mRenderMode = RENDERMODE_CONTINUOUSLY
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
@@ -45,19 +45,19 @@ class TGLSurfaceView : SurfaceView, SurfaceHolder.Callback {
     }
 
     fun setRender(tglRender: TGLRender?) {
-        this.tglRender = tglRender
+        this.mTGLRender = tglRender
     }
 
     fun setRenderMode(renderMode: Int) {
-        if (tglRender == null) {
+        if (mTGLRender == null) {
             throw   RuntimeException("must set render before")
         }
-        this.renderMode = renderMode
+        this.mRenderMode = renderMode
     }
 
     fun setSurfaceAndEglContext(surface: Surface?, eglContext: EGLContext?) {
         this.surface = surface
-        this.eglContext = eglContext
+        this.teglContext = eglContext
     }
 
     fun getEglContext(): EGLContext? {
@@ -88,6 +88,6 @@ class TGLSurfaceView : SurfaceView, SurfaceHolder.Callback {
         teglThread?.onDestroy()
         teglThread = null
         surface = null
-        eglContext = null
+        teglContext = null
     }
 }
