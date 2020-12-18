@@ -19,7 +19,7 @@ import javax.microedition.khronos.egl.EGLContext
  * @version v1.0.0
  *
  */
-class TGLSurfaceView : SurfaceView, SurfaceHolder.Callback {
+open class TGLSurfaceView : SurfaceView, SurfaceHolder.Callback {
 
     companion object {
         val RENDERMODE_WHEN_DIRTY = 0
@@ -34,13 +34,23 @@ class TGLSurfaceView : SurfaceView, SurfaceHolder.Callback {
 
     var mRenderMode = RENDERMODE_CONTINUOUSLY
 
-    constructor(context: Context) : this(context, null)
-    constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
+    constructor(context: Context) : super(context) {
+        initHolder(context,null,0)
+    }
+
+    constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
+        initHolder(context,attributeSet,0)
+    }
+
     constructor(context: Context, attributeSet: AttributeSet?, defStyle: Int) : super(
         context,
         attributeSet,
         defStyle
     ) {
+        initHolder(context,attributeSet,defStyle)
+    }
+
+    private fun initHolder(context: Context, attributeSet: AttributeSet?=null, defStyle: Int=0) {
         holder.addCallback(this)
     }
 

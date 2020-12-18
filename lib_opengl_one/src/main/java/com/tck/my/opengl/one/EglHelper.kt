@@ -2,6 +2,7 @@ package com.tck.my.opengl.one
 
 
 import android.view.Surface
+import com.tck.my.opengl.base.MyLog
 import javax.microedition.khronos.egl.*
 
 /**

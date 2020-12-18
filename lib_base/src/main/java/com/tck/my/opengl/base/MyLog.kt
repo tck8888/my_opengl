@@ -1,4 +1,4 @@
-package com.tck.my.opengl.one
+package com.tck.my.opengl.base
 
 import android.util.Log
 

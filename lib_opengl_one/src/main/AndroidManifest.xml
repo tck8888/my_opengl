@@ -3,7 +3,8 @@
     package="com.tck.my.opengl.one">
 
     <application>
-        <activity android:name=".OpenGLTrainOneActivity"></activity>
+        <activity android:name=".texture.TextureActivity"></activity>
+        <activity android:name=".OpenGLTrainOneActivity" />
     </application>
 
 </manifest>

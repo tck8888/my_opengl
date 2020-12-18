@@ -1,5 +1,6 @@
 package com.tck.my.opengl.one
 
+import com.tck.my.opengl.base.MyLog
 import com.tck.my.opengl.one.TGLSurfaceView.Companion.RENDERMODE_CONTINUOUSLY
 import com.tck.my.opengl.one.TGLSurfaceView.Companion.RENDERMODE_WHEN_DIRTY
 import java.lang.ref.WeakReference
