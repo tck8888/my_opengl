@@ -1,4 +1,4 @@
-package com.tck.my.opengl.camerax
+ package com.tck.my.opengl.camerax
 
 import android.content.Context
 import android.opengl.GLES20

@@ -17,28 +17,9 @@ import java.io.InputStreamReader
  * @version v1.0.0
  *
  */
-object OpenGLUtils {
+object MyOpenGLUtils {
 
     fun readRawTextFile(context: Context, rawId: Int): String {
-        val sb = StringBuilder()
-        context.resources.openRawResource(rawId).use {
-            InputStreamReader(it).use { inputStreamReader ->
-                BufferedReader(inputStreamReader).use { bufferedReader ->
-                    var line: String?
-                    do {
-                        line = bufferedReader.readLine()
-                        if (line == null) {
-                            break
-                        }
-                        sb.append(line).append("\n")
-                    } while (true)
-                }
-            }
-        }
-        return sb.toString()
-    }
-
-    fun readRawTextFile2(context: Context, rawId: Int): String {
         val sb = StringBuilder()
         context.resources.openRawResource(rawId).use {
             InputStreamReader(it).use { inputStreamReader ->
@@ -52,7 +33,12 @@ object OpenGLUtils {
         return sb.toString()
     }
 
-    @Throws(IllegalStateException::class)
+    fun createProgram(context: Context, vertexRawId: Int, fragmentRawId: Int): Int {
+        val vertexSource = readRawTextFile(context, vertexRawId)
+        val fragmentSource = readRawTextFile(context, fragmentRawId)
+        return loadProgram(vertexSource, fragmentSource)
+    }
+
     fun loadProgram(vertexSource: String, fragmentSource: String): Int {
         /**
          * 顶点着色器

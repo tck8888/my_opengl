@@ -7,6 +7,7 @@ import com.tck.my.opengl.camerax.CameraEnterActivity
 import com.tck.my.opengl.camerax.CameraxActivity
 import com.tck.my.opengl.databinding.ActivityMainBinding
 import com.tck.my.opengl.one.OpenGLTrainOneActivity
+import com.tck.my.opengl.one.texture.TextureActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnOpenglTrainOne.setOnClickListener {
-            startActivity(Intent(this, OpenGLTrainOneActivity::class.java))
+            startActivity(Intent(this, TextureActivity::class.java))
         }
 
         binding.btnOpenglCamerax.setOnClickListener {
