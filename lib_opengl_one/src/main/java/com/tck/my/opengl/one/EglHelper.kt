@@ -1,9 +1,11 @@
 package com.tck.my.opengl.one
 
 
+import android.opengl.EGL14
 import android.view.Surface
 import com.tck.my.opengl.base.MyLog
 import javax.microedition.khronos.egl.*
+
 
 /**
  *
@@ -71,15 +73,19 @@ class EglHelper {
             throw  IllegalArgumentException("eglChooseConfig failed #2")
         }
         //6、创建EglContext
+        val attrib_list = intArrayOf(
+            EGL14.EGL_CONTEXT_CLIENT_VERSION, 2,
+            EGL10.EGL_NONE
+        )
         eglContext = if (context != null) {
-            tempEgl.eglCreateContext(eglGetDisplay, configs[0], context, null)
+            tempEgl.eglCreateContext(eglGetDisplay, configs[0], context, attrib_list)
         } else {
-            tempEgl.eglCreateContext(eglGetDisplay, configs[0], EGL10.EGL_NO_CONTEXT, null)
+            tempEgl.eglCreateContext(eglGetDisplay, configs[0], EGL10.EGL_NO_CONTEXT, attrib_list)
         }
         //7、创建渲染的Surface
         eglSurface = tempEgl.eglCreateWindowSurface(eglGetDisplay, configs[0], surface, null)
         //8、绑定EglContext和Surface到显示设备中
-        if (!tempEgl.eglMakeCurrent(eglGetDisplay, eglSurface, eglSurface,eglContext)) {
+        if (!tempEgl.eglMakeCurrent(eglGetDisplay, eglSurface, eglSurface, eglContext)) {
             throw  RuntimeException("eglMakeCurrent fail")
         }
         egl = tempEgl

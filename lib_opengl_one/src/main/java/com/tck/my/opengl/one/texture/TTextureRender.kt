@@ -32,14 +32,14 @@ class TTextureRender(val context: Context) : TGLRender {
     private var vertexBuffer: FloatBuffer
 
     private val fragmentData = floatArrayOf(
-        //            0f, 1f,
-        //            1f, 1f,
-        //            0f, 0f,
-        //            1f, 0f
-        0f, 0.5f,
-        0.5f, 0.5f,
-        0f, 0f,
-        0.5f, 0f
+                    0f, 1f,
+                    1f, 1f,
+                    0f, 0f,
+                    1f, 0f
+//        0f, 0.5f,
+//        0.5f, 0.5f,
+//        0f, 0f,
+//        0.5f, 0f
     )
     private var fragmentBuffer: FloatBuffer
 
@@ -87,7 +87,7 @@ class TTextureRender(val context: Context) : TGLRender {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
 
-        var bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.ic_baseline_5g_24)
+        var bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.androids)
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
 
         bitmap.recycle()
@@ -103,6 +103,8 @@ class TTextureRender(val context: Context) : TGLRender {
     override fun onDrawFrame() {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
         GLES20.glClearColor(1f,0f, 0f, 1f)
+
+        GLES20.glUseProgram(program)
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureid)
 
