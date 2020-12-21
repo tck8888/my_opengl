@@ -33,6 +33,7 @@ class TGLTextureView: TGLSurfaceView{
         initRender(context,attributeSet,defStyle)
     }
     private fun initRender(context: Context, attributeSet: AttributeSet?=null, defStyle: Int=0) {
-        setRender(TTextureRender(context))
+       // setRender(TTextureRender(context))
+        setRender(TTextureRenderWithVBO(context))
     }
 }
